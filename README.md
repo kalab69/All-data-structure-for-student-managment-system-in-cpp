@@ -146,19 +146,16 @@ Data Structures
 
 Menu-driven programming
 
-
-
-
-
-How to Run
-Compile
-Using g++:
-g++ main.cpp -o student_system
-Run
-./student_system
-
 Example Menu
-======================================Student Information Management System======================================Select a Data Structure1. Single linked list2. Doubly linked list3. Stack4. Queue5. Tree6. Exit
+======================================
+Student Information Management System
+======================================
+Select a Data Structure
+1. Single linked list
+2. 2. Doubly linked list
+3. Stack
+4. Queue
+5. Tree6. Exit
 
 Data Stored
 Each student contains:
