@@ -1,0 +1,892 @@
+#include <iostream>
+using namespace std;
+
+// Single linked list
+
+struct Student_linked_list
+{
+public:
+    string name;
+    int id;
+    double cgpa;
+    string department;
+    Student_linked_list *next;
+};
+
+void insert_studentAtBegining(Student_linked_list *&head, string Name, int ID, double Cgpa, string Department)
+{
+    Student_linked_list *s = new Student_linked_list();
+    s->name = Name;
+    s->id = ID;
+    s->cgpa = Cgpa;
+    s->department = Department;
+    s->next = head;
+    head = s;
+}
+void deleteAtTheBegining(Student_linked_list *&head)
+{
+    if (head == NULL)
+    {
+        cout << "No Value To Delete\n";
+        return;
+    }
+    Student_linked_list *temp = head;
+    head = head->next;
+
+    delete temp;
+}
+
+void display(Student_linked_list *head)
+{
+
+    if (head == NULL)
+    {
+        cout << "List is empty.\n";
+        return;
+    }
+
+    Student_linked_list *temp = head;
+
+    while (temp != NULL)
+    {
+
+        cout << "----------------------\n";
+        cout << "Name: " << temp->name << endl;
+        cout << "ID: " << temp->id << endl;
+        cout << "CGPA: " << temp->cgpa << endl;
+        cout << "Department: " << temp->department << endl;
+
+        temp = temp->next;
+    }
+
+    cout << "----------------------\n";
+}
+void search_linkedlist(Student_linked_list *head, int id)
+{
+    Student_linked_list *temp = head;
+    while (temp != NULL)
+    {
+        if (temp->id == id)
+        {
+            cout << "Found\n";
+            cout << "Name: " << temp->name << endl;
+            cout << "Id:" << temp->id << endl;
+            cout << "CGPA: " << temp->cgpa << endl;
+            cout << "Department: " << temp->department << endl;
+        }
+        temp = temp->next;
+    }
+}
+
+// doubly linked list
+
+struct Student_doubly_linked_list
+{
+public:
+    string name;
+    int id;
+    double cgpa;
+    string department;
+    Student_doubly_linked_list *next;
+    Student_doubly_linked_list *prev;
+};
+void insert_doubly_studentAtBegining(Student_doubly_linked_list *&head, string Name, int ID, double Cgpa, string Department)
+{
+    Student_doubly_linked_list *s = new Student_doubly_linked_list();
+    s->name = Name;
+    s->id = ID;
+    s->cgpa = Cgpa;
+    s->department = Department;
+    s->next = head;
+    s->prev = NULL;
+    if (head != NULL)
+    {
+        head->prev = s;
+    }
+    head = s;
+}
+void delete_doubly_AtTheBegining(Student_doubly_linked_list *&head)
+{
+    if (head == NULL)
+    {
+        cout << "No Value To Delete\n";
+        return;
+    }
+    Student_doubly_linked_list *temp = head;
+    head = head->next;
+    if (head != NULL)
+    {
+        head->prev = NULL;
+    }
+
+    delete temp;
+}
+
+void display_doubly_backwards(Student_doubly_linked_list *head)
+{
+
+    if (head == NULL)
+    {
+        cout << "List is empty.\n";
+        return;
+    }
+
+    Student_doubly_linked_list *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+
+    while (temp != NULL)
+    {
+
+        cout << "----------------------\n";
+        cout << "Name: " << temp->name << endl;
+        cout << "ID: " << temp->id << endl;
+        cout << "CGPA: " << temp->cgpa << endl;
+        cout << "Department: " << temp->department << endl;
+
+        temp = temp->prev;
+    }
+
+    cout << "----------------------\n";
+}
+
+void search_doubly_linkedlist(Student_doubly_linked_list *head, int id)
+{
+
+    if (head == NULL)
+    {
+        cout << "List empty\n";
+        return;
+    }
+    Student_doubly_linked_list *temp = head;
+    while (temp->next != NULL)
+    {
+        temp = temp->next;
+    }
+    while (temp != NULL)
+    {
+        if (temp->id == id)
+        {
+            cout << "Found\n";
+            cout << "Name: " << temp->name << endl;
+            cout << "Id:" << temp->id << endl;
+            cout << "CGPA: " << temp->cgpa << endl;
+            cout << "Department: " << temp->department << endl;
+        }
+        temp = temp->prev;
+    }
+}
+
+// Stack
+
+class student_stack
+{
+public:
+    int top = -1;
+    int id[100];
+    string name[100];
+    double cgpa[100];
+    string department[100];
+    student_stack()
+    {
+        top = -1;
+    }
+    void push(string Name, int Id, double Cgpa, string Department)
+    {
+        if (top == 99)
+        {
+            cout << "Stack overflow\n";
+        }
+        else
+        {
+            top++;
+            id[top] = Id;
+            name[top] = Name;
+            cgpa[top] = Cgpa;
+            department[top] = Department;
+        }
+    }
+    void pop()
+    {
+        if (top == -1)
+        {
+            cout << "Stack underflow\n";
+        }
+        else
+        {
+            cout << "Removed: \n"
+                 << "Name: " << name[top] << endl;
+            cout << "ID: " << id[top] << endl;
+            cout << "CGPA: " << cgpa[top] << endl;
+            cout << "Department: " << department[top] << endl;
+            top--;
+        }
+    }
+    void peek()
+    {
+        if (top == -1)
+        {
+            cout << "Stack empty\n";
+        }
+        else
+        {
+            cout << "Top element: \n";
+            cout << "Name: " << name[top] << endl;
+            cout << "ID: " << id[top] << endl;
+            cout << "CGPA: " << cgpa[top] << endl;
+            cout << "Department: " << department[top] << endl;
+        }
+    }
+    void display()
+    {
+        if (top == -1)
+        {
+            cout << "Stack empty\n";
+            return;
+        }
+
+        for (int i = top; i >= 0; i--)
+        {
+            cout << "----------------------\n";
+            cout << "Name: " << name[i] << endl;
+            cout << "ID: " << id[i] << endl;
+            cout << "CGPA: " << cgpa[i] << endl;
+            cout << "Department: " << department[i] << endl;
+        }
+    }
+    void search(int value)
+    {
+        if (top == -1)
+        {
+            cout << "Quque empty\n";
+            return;
+        }
+        for (int i = top; i >= 0; i--)
+        {
+            if (id[i] == value)
+            {
+                cout << "----------------------\n";
+                cout << "Name: " << name[i] << endl;
+                cout << "ID: " << id[i] << endl;
+                cout << "CGPA: " << cgpa[i] << endl;
+                cout << "Department: " << department[i] << endl;
+                break;
+            }
+        }
+    }
+};
+
+// Quque
+
+class student_quque
+{
+public:
+    int id[100];
+    string name[100];
+    double cgpa[100];
+    string department[100];
+    int front;
+    int rear;
+    student_quque()
+    {
+        front = 0;
+        rear = -1;
+    }
+    void enquque(string Name, int Id, double Cgpa, string Department)
+    {
+        if (rear == 99)
+        {
+            cout << "Quque overflow\n";
+        }
+        else
+        {
+            rear++;
+            id[rear] = Id;
+            name[rear] = Name;
+            cgpa[rear] = Cgpa;
+            department[rear] = Department;
+        }
+    }
+    void deque()
+    {
+        if (front > rear)
+        {
+            cout << "Quque underflow\n";
+        }
+        else
+        {
+            cout << "Removed \n"
+                 << "Name: " << name[front] << endl;
+            cout << "ID: " << id[front] << endl;
+            cout << "CGPA: " << cgpa[front] << endl;
+            cout << "Department: " << department[front] << endl;
+            front++;
+        }
+    }
+
+    void peek()
+    {
+        if (front > rear)
+        {
+            cout << "Quque empty\n";
+        }
+        else
+        {
+            cout << "Front element " << "Name: " << name[front] << endl;
+            cout << "ID: " << id[front] << endl;
+            cout << "CGPA: " << cgpa[front] << endl;
+            cout << "Department: " << department[front] << endl;
+        }
+    }
+    void display_quque()
+    {
+        if (front > rear)
+        {
+            cout << "Quque empty\n";
+            return;
+        }
+        for (int i = front; i <= rear; i++)
+        {
+            cout << "Name: " << name[i] << endl;
+            cout << "ID: " << id[i] << endl;
+            cout << "CGPA: " << cgpa[i] << endl;
+            cout << "Department: " << department[i] << endl;
+        }
+    }
+    void search(int value)
+    {
+        if (front > rear)
+        {
+            cout << "Quque empty\n";
+        }
+        for (int i = front; i <= rear; i++)
+        {
+            if (id[i] == value)
+            {
+                cout << "Name: " << name[i] << endl;
+                cout << "ID: " << id[i] << endl;
+                cout << "CGPA: " << cgpa[i] << endl;
+                cout << "Department: " << department[i] << endl;
+                break;
+            }
+        }
+    }
+};
+
+// Tree/graph
+
+class student_tree
+{
+public:
+    string name;
+    int id;
+    double cgpa;
+    string department;
+    student_tree *right;
+    student_tree *left;
+    student_tree(string Name, int ID, double Cgpa, string Departmen)
+    {
+        name = Name;
+        id = ID;
+        cgpa = Cgpa;
+        department = Departmen;
+        right = NULL;
+        left = NULL;
+    }
+};
+student_tree *insert_tree(student_tree *root, string name, int id, double cgpa, string department)
+{
+    if (root == NULL)
+        return new student_tree(name, id, cgpa, department);
+
+    if (id == root->id)
+    {
+        cout << "Student with this ID already exists\n";
+        return root;
+    }
+
+    if (id < root->id)
+        root->left = insert_tree(root->left, name, id, cgpa, department);
+    else
+        root->right = insert_tree(root->right, name, id, cgpa, department);
+
+    return root;
+}
+student_tree *findMin(student_tree *node)
+{
+    while (node->left != NULL)
+        node = node->left;
+    return node;
+}
+
+student_tree *delete_node(student_tree *root, int id, bool &found)
+{
+
+    // Base case: empty tree
+    if (root == NULL)
+    {
+        cout << "Student not found\n";
+        return NULL;
+    }
+
+    // Step 1: Navigate to the node
+    if (id < root->id)
+    {
+        root->left = delete_node(root->left, id, found); // go left
+    }
+    else if (id > root->id)
+    {
+        root->right = delete_node(root->right, id, found); // go right
+    }
+    else
+    {
+        // Found it! Now handle the 3 cases:
+        found = true;
+        // CASE 1: Leaf node (no children)
+        if (root->left == NULL && root->right == NULL)
+        {
+            delete root;
+            return NULL;
+        }
+
+        // CASE 2a: Only right child
+        else if (root->left == NULL)
+        {
+            student_tree *temp = root->right;
+            delete root;
+            return temp;
+        }
+
+        // CASE 2b: Only left child
+        else if (root->right == NULL)
+        {
+            student_tree *temp = root->left;
+            delete root;
+            return temp;
+        }
+
+        // CASE 3: Two children
+        else
+        {
+            // Find inorder successor (smallest in right subtree)
+            student_tree *successor = findMin(root->right);
+
+            // Copy successor's data into this node
+            root->name = successor->name;
+            root->id = successor->id;
+            root->cgpa = successor->cgpa;
+            root->department = successor->department;
+
+            // Delete the successor from the right subtree
+            root->right = delete_node(root->right, successor->id, found);
+        }
+    }
+    return root;
+}
+void display_tree_inorder(student_tree *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    display_tree_inorder(root->left);
+    cout << "----------------------\n";
+    cout << "Name: " << root->name << endl;
+    cout << "ID: " << root->id << endl;
+    cout << "CGPA: " << root->cgpa << endl;
+    cout << "Department: " << root->department << endl;
+
+    display_tree_inorder(root->right);
+}
+void display_tree_postorder(student_tree *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    display_tree_postorder(root->left);
+    display_tree_postorder(root->right);
+    cout << "----------------------\n";
+    cout << "Name: " << root->name << endl;
+    cout << "ID: " << root->id << endl;
+    cout << "CGPA: " << root->cgpa << endl;
+    cout << "Department: " << root->department << endl;
+}
+void display_tree_preorder(student_tree *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << "----------------------\n";
+    cout << "Name: " << root->name << endl;
+    cout << "ID: " << root->id << endl;
+    cout << "CGPA: " << root->cgpa << endl;
+    cout << "Department: " << root->department << endl;
+    display_tree_preorder(root->left);
+    display_tree_preorder
+    
+    (root->right);
+}
+void search_tree(student_tree *root, int value)
+{
+    if (root == NULL)
+    {
+        cout << "Empty tree\n";
+        return;
+    }
+    if (root->id == value)
+    {
+        cout << "----------------------\n";
+        cout << "Name: " << root->name << endl;
+        cout << "ID: " << root->id << endl;
+        cout << "CGPA: " << root->cgpa << endl;
+        cout << "Department: " << root->department << endl;
+        return;
+    }
+    if (value > root->id)
+    {
+        search_tree(root->right, value);
+    }
+    else
+    {
+        search_tree(root->left, value);
+    }
+}
+
+int main()
+{
+    string name, department;
+    double cgpa;
+    int id;
+    int choise;
+    int x=1;
+
+    Student_linked_list *n = NULL;
+    Student_doubly_linked_list *n2 = NULL;
+    student_stack *s = new student_stack();
+    student_quque q;
+    student_tree *root = NULL;
+do{
+    cout << "======================================\n";
+    cout << "Student Information Managment System\n";
+    cout << "======================================\n\n\n";
+    cout << "Select a Data Structure\n";
+    cout << "1. Single linked list\n";
+    cout << "2. Doubly linked list\n";
+    cout << "3. Stack\n";
+    cout << "4. Quque\n";
+    cout << "5. Tree\n";
+    cout << "6. Exit\n";
+    cin >> choise;
+    switch (choise)
+    {
+    case 1:
+    {
+         int choise2;
+         do{
+
+        cout << "______________________________________\n";
+        cout << "Single linked list\n";
+        cout << "--------------------------------------\n\n";
+        cout << "1. Insert student data at the begining\n";
+        cout << "2. Delete student data at the begining\n";
+        cout << "3. Display all students data\n";
+        cout << "4. Search for a student\n";
+        cout << "5. Return to Main menu\n";
+        cin >> choise2;
+        if (choise2 == 1)
+        {
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter Id: ";
+            cin >> id;
+            cout << "Enter Department: ";
+            cin >> department;
+            cout << "Enter cgpa: ";
+            cin >> cgpa;
+            insert_studentAtBegining(n, name, id, cgpa, department);
+        }
+        else if (choise2 == 2)
+        {
+            deleteAtTheBegining(n);
+        }
+        else if (choise2 == 3)
+        {
+            display(n);
+        }
+        else if (choise2 == 4)
+        {
+            int id_to_search;
+            cout << "Enter a student id to search: ";
+            cin >> id_to_search;
+            search_linkedlist(n, id_to_search);
+        }
+        else if(choise==5){
+
+            // nothing
+        }
+        else
+        {
+            cout << "Entered a Wrong Number Enter Only (1-4)\n";
+        }}while(choise2!=5);
+        break;
+    }
+    case 2:
+    {   int choise3;
+        do{
+        cout << "______________________________________\n";
+        cout << "Doubly linked list\n";
+        cout << "--------------------------------------\n\n";
+        cout << "1. Insert student data at the begining\n";
+        cout << "2. Delete student data at the begining\n";
+        cout << "3. Display all students data backwards\n";
+        cout << "4. Search for a student\n";
+        cout << "5. Return to Main menu\n";
+        
+        cin >> choise3;
+        if (choise3 == 1)
+        {
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter Id: ";
+            cin >> id;
+            cout << "Enter Department: ";
+            cin >> department;
+            cout << "Enter cgpa: ";
+            cin >> cgpa;
+            insert_doubly_studentAtBegining(n2, name, id, cgpa, department);
+            cout << "Entered succesfully\n";
+        }
+        else if (choise3 == 2)
+        {
+            delete_doubly_AtTheBegining(n2);
+        }
+        else if (choise3 == 3)
+        {
+            display_doubly_backwards(n2);
+        }
+        else if (choise3 == 4)
+        {
+            int id_to_search;
+            cout << "Enter a student id to search: ";
+            cin >> id_to_search;
+            search_doubly_linkedlist(n2, id_to_search);
+        }
+        else if(choise==5){
+
+            // nothing
+        }
+        else
+        {
+            cout << "Entered a Wrong Number Enter Only (1-4)\n";
+        }
+        }while(choise3!=5);
+        break;
+    }
+    case 3:
+    { 
+         int choise3;
+         do{
+        cout << "____________________________\n";
+        cout << "Stack Operations\n";
+        cout << "-----------------------------\n\n";
+        cout << "1. Push student data\n";
+        cout << "2. Pop student data\n";
+        cout << "3. Peek top data\n";
+        cout << "4. Search for a student\n";
+        cout << "5. Return to Main menu\n";
+       
+        cin >> choise3;
+        if (choise3 == 1)
+        {
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter Id: ";
+            cin >> id;
+            cout << "Enter Department: ";
+            cin >> department;
+            cout << "Enter cgpa: ";
+            cin >> cgpa;
+            s->push(name, id, cgpa, department);
+        }
+        else if (choise3 == 2)
+        {
+            s->pop();
+        }
+        else if (choise3 == 3)
+        {
+            s->peek();
+        }
+        else if (choise3 == 4)
+        {
+            int id_to_search;
+            cout << "Enter a student id to search: ";
+            cin >> id_to_search;
+            s->search(id_to_search);
+        }
+        else if(choise==5){
+
+            // nothing
+        }
+        else
+        {
+            cout << "Enterd a wrong Number\n";
+        }
+     } while(choise3!=5);
+        break;
+    }
+    case 4:
+    {
+          int choise4;
+          do{
+        cout << "____________________________\n";
+        cout << "Quque Operations\n";
+        cout << "-----------------------------\n\n";
+        cout << "1. Enque(insert)student data\n";
+        cout << "2. Dequque(remove)student data(first data)\n";
+        cout << "3. Peek First data\n";
+        cout << "4. Search for a student\n";
+        cout << "5. Display all student data \n ";
+        cout << "6. Return to Main menu\n";
+      
+        cin >> choise4;
+        if (choise4 == 1)
+        {
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter Id: ";
+            cin >> id;
+            cout << "Enter Department: ";
+            cin >> department;
+            cout << "Enter cgpa: ";
+            cin >> cgpa;
+            q.enquque(name, id, cgpa, department);
+            cout << "Entered data succesfully\n";
+        }
+        else if (choise4 == 2)
+        {
+            q.deque();
+            cout << "Removed first data sucessfully\n";
+        }
+        else if (choise4 == 3)
+        {
+            q.peek();
+        }
+        else if (choise4 == 4)
+        {
+            cout << "Enter student Id to search: ";
+            cin >> id;
+            q.search(id);
+        }
+        else if (choise4 == 5)
+        {
+            q.display_quque();
+        }
+        else if(choise==6){
+
+            // nothing
+        }
+        else
+        {
+            cout << "Entered wrong number\n";
+        }
+        
+    }while(choise4!=6);
+    break;
+    
+    case 5:
+    {
+          int choise5;
+          do{
+        cout << "____________________________\n";
+        cout << "Tree Operations\n";
+        cout << "-----------------------------\n\n";
+        cout << "1. Insert student data\n";
+        cout << "2. Delete student data\n";
+        cout << "3. Search for a student\n";
+        cout << "4. Traverse tree(inorder)\n";
+        cout << "5. Traverse tree(postorder)\n";
+        cout << "6. Traverse tree(preorder)\n";
+        cout<<"7. Return to Main menu\n";
+      
+        cin >> choise5;
+        if (choise5 == 1)
+        {
+            cout << "Enter name: ";
+            cin >> name;
+            cout << "Enter Id(must be "<<x++<<"): ";
+            cin >> id;
+            cout << "Enter Department: ";
+            cin >> department;
+            cout << "Enter cgpa: ";
+            cin >> cgpa;
+            root = insert_tree(root, name, id, cgpa, department);
+            cout << "Data entered Succesfully\n";
+        }
+        else if (choise5 == 2)
+        {
+            int id_to_search;
+            cout << "Enter a student id to search: ";
+            cin >> id_to_search;
+            bool found = false;
+            root = delete_node(root, id_to_search, found);
+            if (!found)
+            {
+                cout << "Student not found\n";
+            }
+            else
+            {
+                cout << "Student deleted successfully\n";
+            }
+        }
+        else if (choise5 == 3)
+        {
+            int id_to_search;
+            cout << "Enter a student id to search: ";
+            cin >> id_to_search;
+            search_tree(root, id_to_search);
+        }
+        else if (choise5 == 4)
+        {
+            display_tree_inorder(root);
+        }
+        else if (choise5 == 5)
+        {
+            display_tree_postorder(root);
+        }
+        else if (choise5 == 6)
+        {
+            display_tree_preorder(root);
+        }
+        else if (choise5==7)
+        {
+           //nothing
+        }
+
+        
+        else
+        {
+            cout << "Entered wrong number\n";
+
+            
+        }
+    }while(choise5!=7);
+    break;
+    }
+
+   
+     
+     
+    default:
+    {
+        cout << "Entered a wrong number\n";
+        break;
+    }
+    }
+    }
+}while(choise!=6);
+   cout << "Exiting the program...\n";
+}
